@@ -1,0 +1,87 @@
+            // Create the record with the status Waiting
+            //------------------------------------------
+            sqlcommand.CommandText = @"INSERT INTO ""ZoneReservation"" " +
+                                              @"VALUES (" +
+                                              @"'" + ZoneList[zx] + "', " +
+                                              @"'" + AgvNo + "', " +
+                                              @"'" + ZoneState + "', " +
+                                              @"To_DATE(" + "'" + OldTime + "'" + ",'DD/MM/YY hh24:mi:ss')" + ")";
+
+            try
+            {
+                rows = sqlcommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+            }
+			
+			sqlcommand.CommandText = @"INSERT INTO ""Zone"" " +
+                                            @"VALUES (" +
+                                            @"'" + ZoneList[zx] + "', " +
+                                            @"'" + 1 + "', " +
+                                            @"'" + 0 + "', " +
+                                            @"'" + 0 + "', " +
+                                            @"(" + "'" + null + "'" + "))";
+            try
+            {
+                    rows = sqlcommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+             
+			
+			// Delete the record from the Database
+            //------------------------------------
+            sqlcommand.CommandText = @"DELETE FROM ""ZoneReservation"" " +
+                                              @"WHERE ""ZoneNr"" ='" + ZoneList[zx] +
+                                              @"' AND ""AgvNr"" ='" + AgvNo + "'";
+
+            try
+            {
+                rows = sqlcommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+            }
+
+			
+			
+			//Read from record zx the zone state and Creation time
+            //----------------------------------------------------
+            sqlcommand.CommandText = @"SELECT ""State"", ""CreateTime""" +
+                                                @" FROM ""ZoneReservation""" +
+                                                @" WHERE ""ZoneNr"" ='" + ZoneList[zx] + "'" +
+                                                @" AND ""AgvNr"" ='" + AgvNo + "'";
+            try
+            {
+                reader = sqlcommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    ZoneState = reader.GetInt32(reader.GetOrdinal("State"));
+                    if (!reader.IsDBNull(reader.GetOrdinal("CreateTime")))
+                    {
+                        OldTime = reader.GetDateTime(reader.GetOrdinal("CreateTime"));
+                    }
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+            }
+			
+            // Update Zone, decreasing the Active Locks for this Zone
+            //-------------------------------------------------------
+            sqlcommand.CommandText = @"UPDATE ""Zone"" " +
+                                              @"SET " +
+                                              @"""ActNrOfAgv"" = ""ActNrOfAgv"" - '" + 1 + "'" +
+                                              @" WHERE " +
+                                              @"""ZoneNr"" ='" + ZoneList[zx] + "'" +
+                                              @" AND ""ActNrOfAgv"" > 0";
+            try
+            {
+                rows = sqlcommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+            }			
+			

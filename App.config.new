@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <appSettings>
+    <add key="ServerName" value="CRITSO-S2034" />
+    <add key="ServerAddressCRITSO-S2034" value="127.0.0.10"/>
+    <add key="MhcsServicesChannel" value="64000"/>
+    <add key="AgvCtlServicesChannel" value="64001"/>
+    <add key="ConnectStringCRITSO-S2034" value="Data Source=.\SQLEXPRESS; Integrated Security=SSPI; Initial Catalog=NOVARTIS"/>
+    <add key="ServiceQueuePathRoot" value=".\Private$\" />
+    <add key="LoggerQueuePath" value=".\Private$\SvcMod" />
+    <add key="MappedFileDirectory" value="C:\Novartis\Mapped\"/>
+    <add key="DebugFileDirectory" value="C:\AgvLog\"/>
+    <add key="TagsMaxItems" value="1024"/>
+    <add key="OptilogConnectString" value="DATA SOURCE=OPTIDEVE;PASSWORD=stm16012012;USER ID=agv"/>
+  </appSettings>
+
+</configuration>
