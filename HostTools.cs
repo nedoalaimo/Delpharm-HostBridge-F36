@@ -1161,7 +1161,7 @@ namespace HostBridge
 
                         // STATO (Word 17)(Byte 34,35)
                         //---
-                        Number = Convert.ToUInt16(StrSTS);    //Converte la stringa in numero
+                        Number = Convert.ToUInt16(StrSTS.Replace(" ", string.Empty));    //Converte la stringa in numero
                         sendbuffer[sidx++] = Number.Byte1;
                         sendbuffer[sidx++] = Number.Byte2;
 
@@ -1218,7 +1218,7 @@ namespace HostBridge
 
                         // NULL (Word 13)(Byte 26,27)   ral 171201 added
                         //----
-                        Number = Convert.ToUInt16(StrSTS);
+                        Number = Convert.ToUInt16(StrSTS.Replace(" ", string.Empty));
                         sendbuffer[sidx++] = Number.Byte1;
                         sendbuffer[sidx++] = Number.Byte2;
 
@@ -1304,7 +1304,7 @@ namespace HostBridge
                         // Codice supporto (Word 21)(Byte 42,43) - Stato primo AGV
                         //----
                         StrSTS = tokens[6];
-                        Number = Convert.ToUInt16(StrSTS);    //Converte la stringa in numero
+                        Number = Convert.ToUInt16(StrSTS.Replace(" ", string.Empty));    //Converte la stringa in numero
                         sendbuffer[sidx++] = Number.Byte1;
                         sendbuffer[sidx++] = Number.Byte2;
 
