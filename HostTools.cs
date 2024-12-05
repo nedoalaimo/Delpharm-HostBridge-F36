@@ -359,14 +359,14 @@ namespace HostBridge
             System.DateTime createtime;
             bool msgfound = false;
             Oracle.DataAccess.Client.OracleCommand cmd = null;
-            OracleTransaction HostTrans = null;
+            //OracleTransaction HostTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
 
             try
             {
                 cmd = new Oracle.DataAccess.Client.OracleCommand();
                 cmd.Connection = connection;
-                HostTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //HostTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
 
                 // Legge il valore
                 //----------------------------------------------------------
@@ -430,22 +430,22 @@ namespace HostBridge
                 {
                     //<Invio fallito>
                 }
-                HostTrans.Commit();
+                //HostTrans.Commit();
             }
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
-                HostTrans.Rollback();
+                //HostTrans.Rollback();
             }
             catch (HostException ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, ex.Message);
-                HostTrans.Rollback();
+                //HostTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                HostTrans.Rollback();
+                //HostTrans.Rollback();
             }       
             finally
             {
@@ -1504,7 +1504,7 @@ namespace HostBridge
             string StrCodiceSupportoOrig, StrCodiceSupportoChg, StrCodiceArrivo;
             string StrCodiceDestinazione, StrSTS = "";
 
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
 
             tokens = message.Split(',');
             //In base alla phase aggiorna il master dei trasporti e manda un telegramma
@@ -1560,12 +1560,12 @@ namespace HostBridge
             catch (OracleException ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, prepmessage, ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, prepmessage, ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
 
             return (prepmessage);
@@ -1583,7 +1583,7 @@ namespace HostBridge
             string StrIC, StrPS, StrAR, StrCOD, StrTID;
             string StrLid, StrLidChg;
 
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
 
             //In base alla phase aggiorna il master dei trasporti e manda un telegramma
             //se necessario, manda un telegramma a Host
@@ -1621,12 +1621,12 @@ namespace HostBridge
             }
             catch (OracleException ex)
             {
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, "PrepareToQueueSMMessage", ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
 
             return (prepmessage);
@@ -1726,7 +1726,7 @@ namespace HostBridge
             string StrUdc = Udc;
             string[] LidList = new string[4];
 
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
 
             try
             {
@@ -1789,12 +1789,12 @@ namespace HostBridge
             }
             catch (OracleException ex)
             {
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, "PrepareToQueueSIMessage", ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
 
             return (prepmessage);

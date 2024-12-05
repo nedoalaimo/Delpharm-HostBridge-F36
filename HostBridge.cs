@@ -927,7 +927,15 @@ namespace HostBridge
                 {
                     MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_INVALID_MESSAGE, ex.Message);
                 }
-                catch (System.Exception ex)
+                catch (OracleException ex)
+                {
+                    MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, ex.Message);
+                }
+                catch (MessageQueueException ex)
+                {
+                    MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_RECEIVE_QUEUE, ex.Message);
+                }
+                catch (Exception ex)
                 {
                     MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_RECEIVE_QUEUE, ex.Message);
                 }

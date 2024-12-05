@@ -739,7 +739,7 @@ namespace HostBridge
 
             //int rows;
             Oracle.DataAccess.Client.OracleCommand cmd;
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
             cmd = new Oracle.DataAccess.Client.OracleCommand();
@@ -804,13 +804,13 @@ namespace HostBridge
                 catch (OracleException e)
                 {
                     MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
-                    ZoneTrans.Rollback();
+                    //ZoneTrans.Rollback();
                     if (!reader.IsClosed) reader.Close();
                 }
                 catch (Exception ex)
                 {
                     MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                    ZoneTrans.Rollback();
+                    //ZoneTrans.Rollback();
                     if (!reader.IsClosed) reader.Close();
                 }
             }

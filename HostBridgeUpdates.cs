@@ -43,7 +43,7 @@ namespace HostBridge
         {
             int rows;
 
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             Oracle.DataAccess.Client.OracleCommand cmd;
             int id = System.Convert.ToInt32(orderid);
             int prio = System.Convert.ToInt32(strprio);
@@ -53,7 +53,7 @@ namespace HostBridge
             cmd = new Oracle.DataAccess.Client.OracleCommand();
             try
             {
-                ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
                 cmd.Connection = connection;
                 // Create the record with the status Waiting
                 //------------------------------------------
@@ -78,18 +78,18 @@ namespace HostBridge
 
 
                 rows = cmd.ExecuteNonQuery();
-                ZoneTrans.Commit();
+                //ZoneTrans.Commit();
             }
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
                 if (!reader.IsClosed) reader.Close();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
                 if (!reader.IsClosed) reader.Close();
             }
 
@@ -108,7 +108,7 @@ namespace HostBridge
             bool onefound = false;
             int rows;
             Oracle.DataAccess.Client.OracleCommand cmd;
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
             cmd = new Oracle.DataAccess.Client.OracleCommand();
@@ -121,7 +121,7 @@ namespace HostBridge
             try
             {
                 cmd.Connection = connection;
-                ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted); // Sul try più esterno per garantire consistenza
+                //ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted); // Sul try più esterno per garantire consistenza
 
                 // Get the transport order data and copy it in History table
                 //----------------------------------------------------------
@@ -157,13 +157,13 @@ namespace HostBridge
                 catch (OracleException e)
                 {
                     MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
-                    ZoneTrans.Rollback();
+                    //ZoneTrans.Rollback();
                     if (!reader.IsClosed) reader.Close();
                 }
                 catch (Exception ex)
                 {
                     MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                    ZoneTrans.Rollback();
+                    //ZoneTrans.Rollback();
                     if (!reader.IsClosed) reader.Close();
                 }
 
@@ -203,13 +203,13 @@ namespace HostBridge
                     catch (OracleException e)
                     {
                         MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
-                        ZoneTrans.Rollback();
+                        //ZoneTrans.Rollback();
                         if (!reader.IsClosed) reader.Close();
                     }
                     catch (Exception ex)
                     {
                         MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                        ZoneTrans.Rollback();
+                        //ZoneTrans.Rollback();
                         if (!reader.IsClosed) reader.Close();
                     }
 
@@ -228,7 +228,7 @@ namespace HostBridge
                     {
                         MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
                         if (!reader.IsClosed) reader.Close();
-                        ZoneTrans.Rollback();
+                        //ZoneTrans.Rollback();
                     }
                     catch (Exception ex)
                     {
@@ -236,12 +236,12 @@ namespace HostBridge
                         if (!reader.IsClosed) reader.Close();
                     }
                 }
-                ZoneTrans.Commit();
+                //ZoneTrans.Commit();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
         }
         /// <summary>
@@ -254,14 +254,14 @@ namespace HostBridge
         {
             int rows;
             Oracle.DataAccess.Client.OracleCommand cmd;
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
             cmd = new Oracle.DataAccess.Client.OracleCommand();
             try
             {
                 cmd.Connection = connection;
-                ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
 
                 // Update the TrOrderMaster
                 //------------------------------------------
@@ -274,19 +274,19 @@ namespace HostBridge
                                 @"""TrOrderNr"" ='" + orderid + "' ";     // Matching on ID or the tansport
 
                 rows = cmd.ExecuteNonQuery();
-                ZoneTrans.Commit();
+                //ZoneTrans.Commit();
             }
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
         }
         /// <summary>
@@ -299,14 +299,14 @@ namespace HostBridge
         {
             int rows;
             Oracle.DataAccess.Client.OracleCommand cmd;
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
             cmd = new Oracle.DataAccess.Client.OracleCommand();
             try
             {
                 cmd.Connection = connection;
-                ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
 
                 // Update the TrOrderMaster
                 //------------------------------------------
@@ -320,19 +320,19 @@ namespace HostBridge
                                 @"""TrOrderNr"" ='" + orderid + "' ";     // Matching on ID or the tansport
 
                 rows = cmd.ExecuteNonQuery();
-                ZoneTrans.Commit();
+                //ZoneTrans.Commit();
             }
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
         }
         /// <summary>
@@ -356,14 +356,14 @@ namespace HostBridge
             error = System.Convert.ToInt32(sndmessage[9]);
 
             Oracle.DataAccess.Client.OracleCommand cmd;
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
             cmd = new Oracle.DataAccess.Client.OracleCommand();
             try
             {
                 cmd.Connection = connection;
-                ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
 
                 // Update the TrOrderMaster
                 //------------------------------------------
@@ -378,19 +378,19 @@ namespace HostBridge
                                 @"""TrOrderNr"" ='" + orderid + "' ";     // Matching on ID or the tansport
 
                 rows = cmd.ExecuteNonQuery();
-                ZoneTrans.Commit();
+                //ZoneTrans.Commit();
             }
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
         }
         /// <summary>
@@ -406,14 +406,14 @@ namespace HostBridge
         {
             int rows;
             Oracle.DataAccess.Client.OracleCommand cmd;
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
             cmd = new Oracle.DataAccess.Client.OracleCommand();
             try
             {
                 cmd.Connection = connection;
-                ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //ZoneTrans = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
 
                 // Update the TrOrderMaster
                 //------------------------------------------
@@ -427,19 +427,19 @@ namespace HostBridge
                                 @"""TrOrderNr"" ='" + orderid + "' ";     // Matching on ID or the tansport
 
                 rows = cmd.ExecuteNonQuery();
-                ZoneTrans.Commit();
+                //ZoneTrans.Commit();
             }
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
                 if (!reader.IsClosed) reader.Close();
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
             }
         }
         /// <summary>
@@ -737,7 +737,7 @@ namespace HostBridge
                 Body += "," + SndMessage.Split(',')[i];
             }
 
-            OracleTransaction ZoneTrans = null;
+            //OracleTransaction ZoneTrans = null;
             Oracle.DataAccess.Client.OracleCommand cmd;
             System.DateTime TlgTime = System.DateTime.Now;
             this.connection = Connection;
@@ -792,14 +792,14 @@ namespace HostBridge
             catch (OracleException e)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ORACLE_EXCEPTION, cmd.CommandText, e.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
                 if (!reader.IsClosed) reader.Close();
                 result = BFULL;
             }
             catch (Exception ex)
             {
                 MessageWriter.Log(MhcsLib.DebugZones.Errors, HOSTBRIDGE_ERR_COMMAND, cmd.CommandText, ex.Message);
-                ZoneTrans.Rollback();
+                //ZoneTrans.Rollback();
                 if (!reader.IsClosed) reader.Close();
                 result = BFULL;
             }

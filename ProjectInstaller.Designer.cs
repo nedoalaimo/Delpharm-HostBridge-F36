@@ -38,7 +38,7 @@
         // 
         // serviceInstaller1
         // 
-        this.serviceInstaller1.Description = "Bridge between Rockwell MhM system and Node AGV control system V1.0.1";
+        this.serviceInstaller1.Description = "Bridge between Rockwell MhM system and Node AGV control system V1.0.2";
         this.serviceInstaller1.DisplayName = "Node Host Bridge";
         this.serviceInstaller1.ServiceName = "HostBridge";
         // 
